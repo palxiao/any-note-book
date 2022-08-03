@@ -1,0 +1,13 @@
+[
+  {
+    "id": 1,
+    "label": "默认目录",
+    "children": [
+      {
+        "id": 2,
+        "label": "示例笔记",
+        "link": "articles/test.md"
+      }
+    ]
+  }
+]

@@ -1,0 +1,77 @@
+{
+  "name": "any-note-book",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "c": "git add . && git-cz",
+    "clog": "conventional-changelog --config ./node_modules/vue-cli-plugin-norm/lib/log -i CHANGELOG.md -s -r 0 && commit-log",
+    "commit": "git add . && git-cz",
+    "electron:build": "vue-cli-service electron:build",
+    "electron:serve": "vue-cli-service electron:serve",
+    "postinstall": "electron-builder install-app-deps",
+    "postuninstall": "electron-builder install-app-deps"
+  },
+  "main": "background.js",
+  "dependencies": {
+    "@bytemd/plugin-breaks": "^1.17.2",
+    "@bytemd/plugin-footnotes": "^1.12.4",
+    "@bytemd/plugin-frontmatter": "^1.17.2",
+    "@bytemd/plugin-gemoji": "^1.17.2",
+    "@bytemd/plugin-gfm": "^1.17.2",
+    "@bytemd/plugin-highlight": "^1.17.2",
+    "@bytemd/plugin-medium-zoom": "^1.17.2",
+    "@bytemd/plugin-mermaid": "^1.17.2",
+    "@bytemd/vue": "^1.17.2",
+    "bytemd": "^1.17.2",
+    "core-js": "^3.8.3",
+    "element-ui": "^2.4.5",
+    "juejin-markdown-themes": "^1.29.3",
+    "multiparty": "^4.2.3",
+    "nanoid": "^4.0.0",
+    "vue": "^2.6.14",
+    "vue-router": "^3.5.1",
+    "vuex": "^3.6.2"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~5.0.0",
+    "@vue/cli-plugin-router": "~5.0.0",
+    "@vue/cli-plugin-vuex": "~5.0.0",
+    "@vue/cli-service": "~5.0.0",
+    "babel-eslint": "^10.1.0",
+    "babel-plugin-component": "^1.1.1",
+    "commitizen": "^4.0.3",
+    "commitlint": "^8.2.0",
+    "conventional-changelog-cli": "^2.0.28",
+    "electron": "^13.0.0",
+    "electron-devtools-installer": "^3.1.0",
+    "eslint": "^7.29.0",
+    "eslint-config-alloy": "3",
+    "eslint-plugin-vue": "^7.12.1",
+    "husky": "^3.0.9",
+    "less": "^4.0.0",
+    "less-loader": "^8.0.0",
+    "right-pad": "^1.0.1",
+    "vue-cli-plugin-electron-builder": "^2.1.1",
+    "vue-cli-plugin-element": "^1.0.1",
+    "vue-cli-plugin-norm": "^1.2.12",
+    "vue-eslint-parser": "^7.6.0",
+    "vue-template-compiler": "^2.6.14"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ],
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/vue-cli-plugin-norm/lib/cz"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  }
+}
