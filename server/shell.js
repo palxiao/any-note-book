@@ -4,7 +4,7 @@
  * @Date: 2022-07-27 10:10:55
  * @Description:
  * @LastEditors: ShawnPhang
- * @LastEditTime: 2022-08-03 16:33:22
+ * @LastEditTime: 2022-08-11 10:56:59
  * @site: book.palxp.com
  */
 const { getResourcesPath, getTemplatePath } = require('./utils/index')
@@ -31,33 +31,41 @@ const pullRepository = async function (data) {
     }
     checkDir(fullPath)
       .then(() => {
-        exec(`cd ${fullPath} && git pull origin ${branch}`, () => {
-          // 拉取分支代码
-          init(fullPath + '/docs').then(() => {
-            resolve()
-          })
-          resolve()
-        })
-      })
-      .catch(() => {
-        exec(`rm -rf ${fullPath}`, () => {
-          // 首次初始化项目
-          exec(shell, function (error, stdout, stderr) {
-            if (error) {
-              console.log(error.stack)
-              console.log('Error code: ' + error.code)
-              reject(new Error(error))
-              return
-            }
+        if (data.force) {
+          cearteProject()
+        } else {
+          exec(`cd ${fullPath} && git pull origin ${branch}`, () => {
+            // 拉取分支代码
             init(fullPath + '/docs').then(() => {
               resolve()
             })
-            // console.log('使用exec方法输出: ' + stdout)
-            // console.log(`stderr: ${stderr}`)
-            // console.log(process.pid)
+            resolve()
           })
+        }
+      })
+      .catch(() => {
+        cearteProject()
+      })
+
+    function cearteProject() {
+      exec(`rm -rf ${fullPath}`, () => {
+        // 首次初始化项目
+        exec(shell, function (error, stdout, stderr) {
+          if (error) {
+            console.log(error.stack)
+            console.log('Error code: ' + error.code)
+            reject(new Error(error))
+            return
+          }
+          init(fullPath + '/docs').then(() => {
+            resolve()
+          })
+          // console.log('使用exec方法输出: ' + stdout)
+          // console.log(`stderr: ${stderr}`)
+          // console.log(process.pid)
         })
       })
+    }
   })
 }
 

@@ -3,7 +3,7 @@
  * @Date: 2022-07-26 14:51:59
  * @Description:
  * @LastEditors: ShawnPhang
- * @LastEditTime: 2022-08-03 11:18:15
+ * @LastEditTime: 2022-08-11 11:15:42
  * @site: book.palxp.com
  */
 // 导入http模块:
@@ -31,27 +31,35 @@ const server = http.createServer(async function (request, response) {
   response.setHeader('Access-Control-Allow-Methods', '*')
 
   if (request.url === '/list') {
+    // 获取文章树
     setJson(response, getSidebarTree())
   } else if (request.url === '/detail') {
     // 如果文章存在，则获取文章，否则新建文章
     const { link } = await getParams(request)
     setJson(response, getArticleDetail(link))
   } else if (request.url === '/save') {
+    // 保存文章
     setJson(response, saveArticle(await getParams(request)))
   } else if (request.url === '/pull') {
+    // 拉取项目
     const params = await getParams(request)
     pullRepository(params).then(() => {
       setJson(response, { msg: '初始化项目成功' })
     })
   } else if (request.url === '/push') {
+    // 提交/保存项目
     pushRepository().then((res) => {
       setJson(response, res)
     })
   } else if (request.url === '/save_tree') {
+    // 保存文章树
     const params = await getParams(request)
     saveTreeSidebar(params)
-    setJson(response)
+    pushRepository().then((res) => {
+      setJson(response, res)
+    })
   } else if (request.url === '/upload') {
+    // 上传图片
     const form = new multiparty.Form()
     form.parse(request, async function (err, fields, files) {
       const file = files.file[0]

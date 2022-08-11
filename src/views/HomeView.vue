@@ -3,7 +3,7 @@
  * @Date: 2022-07-26 22:25:43
  * @Description:  
  * @LastEditors: ShawnPhang
- * @LastEditTime: 2022-08-03 17:57:03
+ * @LastEditTime: 2022-08-11 10:30:09
  * @site: book.palxp.com
 -->
 <template>
@@ -36,10 +36,10 @@ export default {
   data() {
     return {
       loading: false,
-      data: [],
       value: '',
       curPath: null,
       pagesUrl: '',
+      data: [],
     }
   },
   async created() {
@@ -48,6 +48,7 @@ export default {
   activated() {
     const { rebuild } = this.$route.query
     rebuild && this.build()
+    this.data = this.$store.getters.treeData
   },
   deactivated() {},
   methods: {
@@ -65,6 +66,7 @@ export default {
       this.loading = true
       await api.pull(data)
       const { result } = await api.getTree()
+      this.$store.commit('setTreeData', result)
       this.data = result
       this.loading = false
       this.$notify({

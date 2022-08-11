@@ -3,11 +3,11 @@
  * @Date: 2022-07-26 22:25:43
  * @Description:  
  * @LastEditors: ShawnPhang
- * @LastEditTime: 2022-08-03 10:21:07
+ * @LastEditTime: 2022-08-11 11:02:34
  * @site: book.palxp.com
 -->
 <template>
-  <el-form ref="form" :rules="rules" :model="form" label-width="80px">
+  <el-form ref="form" v-loading="loading" :rules="rules" :model="form" label-width="80px">
     <el-form-item label="项目标题">
       <el-input v-model="form.name"></el-input>
     </el-form-item>
@@ -31,17 +31,20 @@
       <el-input v-model="form.pages" type="textarea"></el-input>
     </el-form-item>
     <el-form-item>
-      <el-button type="primary" @click="onSubmit">立即保存</el-button>
+      <el-button type="primary" @click="onSubmit(false)">立即保存</el-button>
+      <el-button @click="onSubmit(true)">强制更新</el-button>
       <el-button>取消</el-button>
     </el-form-item>
   </el-form>
 </template>
 <script>
 import { Form, FormItem, Input, Checkbox, CheckboxButton, CheckboxGroup } from 'element-ui'
+import api from '@/api'
 export default {
   components: { [Input.name]: Input, [Form.name]: Form, [FormItem.name]: FormItem, [Checkbox.name]: Checkbox, [CheckboxButton.name]: CheckboxButton, [CheckboxGroup.name]: CheckboxGroup },
   data() {
     return {
+      loading: false,
       form: {
         name: 'Any-Note-Book',
         repo: '',
@@ -60,11 +63,16 @@ export default {
     this.form = config ? JSON.parse(config) : this.form
   },
   methods: {
-    onSubmit() {
-      this.$refs['form'].validate((valid) => {
+    onSubmit(force) {
+      this.$refs['form'].validate(async (valid) => {
         if (valid) {
+          if (force) {
+            this.loading = true
+            await api.pull({ ...this.form, ...{ force } })
+          }
           window.localStorage.setItem('config', JSON.stringify(this.form))
           setTimeout(() => {
+            this.loading = false
             this.$router.push({ path: '/', query: { rebuild: 1 } })
           }, 300)
         } else {

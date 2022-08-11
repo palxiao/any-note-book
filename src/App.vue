@@ -3,7 +3,7 @@
  * @Date: 2022-07-26 22:25:43
  * @Description:  
  * @LastEditors: ShawnPhang
- * @LastEditTime: 2022-08-03 11:32:34
+ * @LastEditTime: 2022-08-11 11:32:20
  * @site: book.palxp.com
 -->
 <template>
@@ -15,8 +15,7 @@
     <el-radio-group v-model="routeName" class="nav" size="small" @change="changeTab">
       <el-radio-button label="/">文章编辑器</el-radio-button>
       <el-radio-button label="/about">项目设置</el-radio-button>
-      <el-radio-button label="/tree">菜单管理(未完成)</el-radio-button>
-      <el-radio-button label="/none">笔记管理</el-radio-button>
+      <el-radio-button label="/tree">菜单管理</el-radio-button>
     </el-radio-group>
     <!-- <router-view /> -->
     <keep-alive>
@@ -33,6 +32,11 @@ export default {
     return {
       routeName: '/',
     }
+  },
+  watch: {
+    $route(to, from) {
+      this.routeName = to.path
+    },
   },
   methods: {
     changeTab() {
