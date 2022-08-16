@@ -3,7 +3,7 @@
  * @Date: 2022-07-26 14:51:59
  * @Description:
  * @LastEditors: ShawnPhang
- * @LastEditTime: 2022-08-11 11:15:42
+ * @LastEditTime: 2022-08-11 16:18:17
  * @site: book.palxp.com
  */
 // 导入http模块:
@@ -100,7 +100,7 @@ const getParams = (request) => {
 }
 
 // listen
-function startServer(port = 3000) {
+function startServer(port = 3366) {
   checkPort(port)
     .then(() => {
       server.listen(port)
