@@ -3,14 +3,14 @@
  * @Date: 2022-07-26 22:25:43
  * @Description:  
  * @LastEditors: ShawnPhang
- * @LastEditTime: 2022-08-11 10:30:09
+ * @LastEditTime: 2022-10-01 16:51:47
  * @site: book.palxp.com
 -->
 <template>
   <div class="home">
     <Editor ref="editor" v-model="value" v-loading="loading" element-loading-text="配置项目中，请稍候.." @save="saveArticle" />
     <div v-show="pagesUrl" class="footer">
-      访问在线地址：<a @click="openLink">{{ pagesUrl }}</a>
+      <a @click="selectArticle({ link: 'README.md' })">编辑首页</a> | 访问在线地址：<a @click="openLink">{{ pagesUrl }}</a>
     </div>
     <web-dialog ref="dialog" :title="false" :fullscreen="true" @keyup.esc="leaveWeb">
       <iframe class="web-view" :src="pagesUrl" frameborder="0"></iframe>
@@ -85,11 +85,13 @@ export default {
       await api.saveTree(this.data)
     },
     async selectArticle(node) {
+      this.loading = true
       const { result } = await api.postDetail(node)
       node.link = result.path.split('/docs/')[1]
-      await api.saveTree(this.data)
       this.curPath = result.path
       this.value = result.text
+      this.loading = false
+      await api.saveTree(this.data)
       this.$refs.listDialog.justClose()
     },
     async openLink() {
