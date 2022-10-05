@@ -4,3 +4,16 @@
   position: absolute;
   right: 8.5rem;
 }
+
+#busuanzi_container_site_pv,
+#busuanzi_container_site_uv {
+  position: fixed;
+  color: #888888;
+  bottom: 0;
+  right: 0;
+  font-size: 12px;
+}
+
+#busuanzi_container_site_uv {
+  bottom: 12px;
+}

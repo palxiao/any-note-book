@@ -20,6 +20,8 @@
     {{juejin}}
   </nav>
   <div id="app"></div>
+  <span id="busuanzi_container_site_uv">uv:<span id="busuanzi_value_site_uv"></span></span>
+  <span id="busuanzi_container_site_pv">pv:<span id="busuanzi_value_site_pv"></span></span>
   <script>
     window.$docsify = {
       name: '{{name}}',
@@ -52,6 +54,7 @@
   <!-- Docsify v4 -->
   <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
   <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
   {{plugins}}
 </body>
 
