@@ -3,7 +3,7 @@
  * @Date: 2022-07-26 22:25:43
  * @Description:  
  * @LastEditors: ShawnPhang
- * @LastEditTime: 2022-08-11 11:02:34
+ * @LastEditTime: 2022-10-19 18:22:19
  * @site: book.palxp.com
 -->
 <template>
@@ -54,13 +54,17 @@ export default {
         pages: '',
       },
       rules: {
-        repo: [{ required: true, message: '仓库名称为必填，如 "yourname/xxxxxxx" ', trigger: 'blur' }],
+        repo: [{ required: true, message: '仓库名称 (Repositories Name) 为必填，格式如 "yourname/xxxxxxx"，注意不要填错', trigger: 'blur' }],
       },
     }
   },
   created() {
     const config = window.localStorage.getItem('config')
     this.form = config ? JSON.parse(config) : this.form
+  },
+  async mounted() {
+    await this.$nextTick()
+    this.$refs['form'].validate() // 进入页面后主动检测以触发提示
   },
   methods: {
     onSubmit(force) {

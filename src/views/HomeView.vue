@@ -3,7 +3,7 @@
  * @Date: 2022-07-26 22:25:43
  * @Description:  
  * @LastEditors: ShawnPhang
- * @LastEditTime: 2022-10-01 16:51:47
+ * @LastEditTime: 2022-10-19 18:32:03
  * @site: book.palxp.com
 -->
 <template>
@@ -104,11 +104,13 @@ export default {
     async saveArticle() {
       const value = this.value.replaceAll(window._apiUrl + '/images', '../images')
       await api.saveArticle({ path: this.curPath, value })
-      this.$message({
-        message: '保存成功',
+      this.$notify({
+        title: '保存成功',
         type: 'success',
       })
-      api.push()
+      this.$message('正在提交中...')
+      const { code } = await api.push()
+      code === 200 && this.$message.success('提交成功!')
     },
     async exit() {
       await this.saveArticle()

@@ -3,7 +3,7 @@
  * @Date: 2022-07-25 17:56:41
  * @Description:  
  * @LastEditors: ShawnPhang
- * @LastEditTime: 2022-08-03 11:27:49
+ * @LastEditTime: 2022-10-08 17:02:57
  * @site: book.palxp.com
 -->
 <template>
@@ -29,7 +29,7 @@ import api from '@/api'
 
 const uploadImages = async (files) => {
   const res = await api.saveImg(files)
-  return [{ url: window._apiUrl + res.result.path, alt: 'img' }]
+  return [{ url: window._apiUrl + res.result.path, alt: '' }]
 }
 
 const plugins = [
