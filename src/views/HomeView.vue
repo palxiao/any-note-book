@@ -3,12 +3,12 @@
  * @Date: 2022-07-26 22:25:43
  * @Description:  
  * @LastEditors: ShawnPhang
- * @LastEditTime: 2022-10-19 18:32:03
+ * @LastEditTime: 2022-10-26 14:53:00
  * @site: book.palxp.com
 -->
 <template>
   <div class="home">
-    <Editor ref="editor" v-model="value" v-loading="loading" element-loading-text="配置项目中，请稍候.." @save="saveArticle" />
+    <Editor ref="editor" v-model="value" v-loading="loading" :element-loading-text="tipText" @save="saveArticle" />
     <div v-show="pagesUrl" class="footer">
       <a @click="selectArticle({ link: 'README.md' })">编辑首页</a> | 访问在线地址：<a @click="openLink">{{ pagesUrl }}</a>
     </div>
@@ -40,6 +40,7 @@ export default {
       curPath: null,
       pagesUrl: '',
       data: [],
+      tipText: '配置项目中，请稍候..',
     }
   },
   async created() {
@@ -86,13 +87,14 @@ export default {
     },
     async selectArticle(node) {
       this.loading = true
+      this.tipText = '保存中..请稍候..'
       const { result } = await api.postDetail(node)
       node.link = result.path.split('/docs/')[1]
       this.curPath = result.path
       this.value = result.text
-      this.loading = false
-      await api.saveTree(this.data)
       this.$refs.listDialog.justClose()
+      await api.saveTree(this.data)
+      this.loading = false
     },
     async openLink() {
       this.pagesUrl = `${this.pagesUrl.split('?')[0]}?r=${new Date().getTime()}`
@@ -108,9 +110,11 @@ export default {
         title: '保存成功',
         type: 'success',
       })
+      this.loading = true
       this.$message('正在提交中...')
       const { code } = await api.push()
       code === 200 && this.$message.success('提交成功!')
+      this.loading = false
     },
     async exit() {
       await this.saveArticle()
