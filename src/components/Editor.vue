@@ -3,7 +3,7 @@
  * @Date: 2022-07-25 17:56:41
  * @Description:  
  * @LastEditors: ShawnPhang
- * @LastEditTime: 2022-10-28 16:09:49
+ * @LastEditTime: 2022-10-28 18:29:38
  * @site: book.palxp.com
 -->
 <template>
@@ -63,7 +63,7 @@ export default {
       }
       timer && clearTimeout(timer)
       timer = setTimeout(() => {
-        this.$emit('save')
+        this.$emit('save', true)
       }, 30000)
     },
     content() {
@@ -74,7 +74,7 @@ export default {
     this._save = (e) => {
       if (e.keyCode === 83 && (navigator.platform.match('Mac') ? e.metaKey : e.ctrlKey)) {
         e.preventDefault()
-        this.$emit('save')
+        this.$emit('save', false)
       }
     }
     document.addEventListener('keydown', this._save)
@@ -89,7 +89,7 @@ export default {
     save(e) {
       if (e.keyCode === 83 && (navigator.platform.match('Mac') ? e.metaKey : e.ctrlKey)) {
         e.preventDefault()
-        this.$emit('save')
+        this.$emit('save', false)
       }
     },
     // setValue(v) {

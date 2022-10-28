@@ -3,7 +3,7 @@
  * @Date: 2022-07-26 22:25:43
  * @Description:  
  * @LastEditors: ShawnPhang
- * @LastEditTime: 2022-10-28 14:49:32
+ * @LastEditTime: 2022-10-28 18:31:23
  * @site: book.palxp.com
 -->
 <template>
@@ -87,7 +87,7 @@ export default {
     },
     async selectArticle(node) {
       this.loading = true
-      this.tipText = '保存中..请稍候..'
+      this.tipText = '同步中..请稍候..'
       const { result } = await api.postDetail(node)
       node.link = result.path.split('/docs/')[1]
       this.curPath = result.path
@@ -103,16 +103,17 @@ export default {
     leaveWeb() {
       this.$refs.dialog.close()
     },
-    async saveArticle() {
+    async saveArticle(passive) {
       const value = this.value.replaceAll(window._apiUrl + '/images', '../images')
       await api.saveArticle({ path: this.curPath, value })
-      this.$notify({
-        title: '保存成功',
-        type: 'success',
-      })
-      this.$message('正在提交中...')
+      !passive &&
+        this.$notify({
+          title: '保存成功',
+          type: 'success',
+        })
+      const msg = this.$message('正在提交中...')
       const { code } = await api.push()
-      code === 200 && this.$message.success('提交成功!')
+      code === 200 && msg.close() && this.$message.success('提交成功!')
     },
     async exit() {
       this.loading = true
