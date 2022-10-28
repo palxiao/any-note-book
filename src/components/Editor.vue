@@ -3,7 +3,7 @@
  * @Date: 2022-07-25 17:56:41
  * @Description:  
  * @LastEditors: ShawnPhang
- * @LastEditTime: 2022-10-28 14:51:17
+ * @LastEditTime: 2022-10-28 16:09:49
  * @site: book.palxp.com
 -->
 <template>
@@ -64,7 +64,7 @@ export default {
       timer && clearTimeout(timer)
       timer = setTimeout(() => {
         this.$emit('save')
-      }, 10000)
+      }, 30000)
     },
     content() {
       this.$emit('input', this.content)
