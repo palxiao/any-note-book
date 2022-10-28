@@ -3,7 +3,7 @@
  * @Date: 2022-07-25 17:56:41
  * @Description:  
  * @LastEditors: ShawnPhang
- * @LastEditTime: 2022-10-08 17:02:57
+ * @LastEditTime: 2022-10-28 14:51:17
  * @site: book.palxp.com
 -->
 <template>
@@ -32,6 +32,8 @@ const uploadImages = async (files) => {
   return [{ url: window._apiUrl + res.result.path, alt: '' }]
 }
 
+let timer = null
+
 const plugins = [
   gfm(),
   breaks(),
@@ -59,6 +61,10 @@ export default {
         const value = this.value.replaceAll('](../images', '](' + window._apiUrl + '/images')
         this.content = value
       }
+      timer && clearTimeout(timer)
+      timer = setTimeout(() => {
+        this.$emit('save')
+      }, 10000)
     },
     content() {
       this.$emit('input', this.content)

@@ -3,7 +3,7 @@
  * @Date: 2022-07-26 22:25:43
  * @Description:  
  * @LastEditors: ShawnPhang
- * @LastEditTime: 2022-10-26 14:53:00
+ * @LastEditTime: 2022-10-28 14:49:32
  * @site: book.palxp.com
 -->
 <template>
@@ -110,16 +110,16 @@ export default {
         title: '保存成功',
         type: 'success',
       })
-      this.loading = true
       this.$message('正在提交中...')
       const { code } = await api.push()
       code === 200 && this.$message.success('提交成功!')
-      this.loading = false
     },
     async exit() {
+      this.loading = true
       await this.saveArticle()
       this.curPath = null
       this.value = ''
+      this.loading = false
     },
   },
 }
