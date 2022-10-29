@@ -3,7 +3,7 @@
  * @Date: 2022-07-26 22:25:43
  * @Description:  
  * @LastEditors: ShawnPhang
- * @LastEditTime: 2022-10-28 18:31:23
+ * @LastEditTime: 2022-10-29 17:09:10
  * @site: book.palxp.com
 -->
 <template>
@@ -20,6 +20,7 @@
       <sidebar v-model="data" :height="'50vh'" :edit="false" @clickNode="selectArticle" />
     </web-dialog>
     <div v-show="!curPath && !loading" class="select-mask"><el-button type="primary" @click="open">新建 / 打开笔记</el-button></div>
+    <el-button v-show="curPath" class="copy-btn" @click="copy">复制</el-button>
     <el-button v-show="curPath" class="exit-btn" type="info" @click="exit">关闭笔记</el-button>
   </div>
 </template>
@@ -122,6 +123,28 @@ export default {
       this.value = ''
       this.loading = false
     },
+    copy() {
+      this.$prompt('请输入图片转换的外链网址，否则图片无法正常被访问', '复制文章', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        inputValue: 'https://book.palxp.com/images',
+      })
+        .then(({ value }) => {
+          const textarea = document.createElement('textarea')
+          textarea.readOnly = 'readonly' // 禁止输入， readonly 防止手机端错误聚焦自动唤起键盘
+          textarea.setAttribute('style', 'position:fixed;top:-9999px;left:-9999px;')
+          textarea.value = this.value.replaceAll(window._apiUrl + '/images', value)
+          document.body.appendChild(textarea)
+          textarea.select()
+          document.execCommand('copy')
+          this.$message({
+            type: 'success',
+            message: '复制成功',
+          })
+          document.body.removeChild(textarea)
+        })
+        .catch(() => {})
+    },
   },
 }
 </script>
@@ -163,9 +186,13 @@ export default {
   height: calc(100% - 30px);
   background: rgba(255, 255, 255, 0.85);
 }
-.exit-btn {
+.exit-btn,
+.copy-btn {
   position: fixed;
   top: 20px;
   right: 10px;
+}
+.copy-btn {
+  right: 124px;
 }
 </style>
