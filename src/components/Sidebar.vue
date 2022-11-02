@@ -3,7 +3,7 @@
  * @Date: 2022-08-02 11:12:06
  * @Description:  
  * @LastEditors: ShawnPhang
- * @LastEditTime: 2022-08-03 11:14:24
+ * @LastEditTime: 2022-11-02 09:45:10
  * @site: book.palxp.com
 -->
 <template>
@@ -16,11 +16,12 @@
       <el-tree :data="data" draggable :node-key="NODE_KEY" default-expand-all :expand-on-click-node="false" @node-click="clickNode">
         <span slot-scope="{ node, data }" class="custom-tree-node">
           <div style="flex: 1">
-            <input v-if="node.isEdit" :ref="'slotTreeInput' + data[NODE_KEY]" v-model="data.label" type="text" @blur.stop="editDone(node, data)" /> <span v-else class="item-label">{{ node.label }} <img v-if="data.link || node.link" :src="require('@/assets/book.svg')" /></span> <el-button v-show="node.isEdit" type="text" size="mini" @click.stop="() => editDone(node, data)"> 确定 </el-button>
+            <input v-if="node.isEdit" :ref="'slotTreeInput' + data[NODE_KEY]" v-model="data.label" type="text" @blur.stop="editDone(node, data)" /> <span v-else class="item-label">{{ node.label }} <img v-if="data.hide" :src="require('@/assets/hide.svg')" /><img v-else-if="data.link || node.link" :src="require('@/assets/book.svg')" /></span> <el-button v-show="node.isEdit" type="text" size="mini" @click.stop="() => editDone(node, data)"> 确定 </el-button>
           </div>
           <span class="options">
             <el-button v-if="!edit" type="text" size="mini" @click.stop="() => openNode(data)"> 打开 </el-button>
-            <el-button type="text" size="mini" @click.stop="() => append(data)"> 新增笔记 </el-button>
+            <el-button v-if="!data.link" type="text" size="mini" @click.stop="() => append(data)"> 新增笔记 </el-button>
+            <el-button v-else type="text" size="mini" @click.stop="() => handleStatus(data)"> {{ data.hide ? '恢复显示' : '隐藏' }} </el-button>
             <el-button type="text" size="mini" @click.stop="() => handleEdit(node, data)"> 重命名 </el-button>
             <el-button v-if="edit" type="text" style="color: #f56c6c" size="mini" @click.stop="() => remove(node, data)"> 删除 </el-button>
           </span>
@@ -101,6 +102,10 @@ export default {
         }
       })
     },
+    handleStatus(data) {
+      // 设置编辑状态
+      this.$set(data, 'hide', !data.hide)
+    },
     editDone(node, data) {
       this.$set(node, 'isEdit', false)
     },
@@ -132,7 +137,7 @@ export default {
   align-items: center;
   img {
     margin-left: 0.5em;
-    width: 15px;
+    width: 17px;
     height: 16px;
   }
 }

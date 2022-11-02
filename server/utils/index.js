@@ -3,7 +3,7 @@
  * @Date: 2022-08-01 11:28:21
  * @Description:
  * @LastEditors: ShawnPhang
- * @LastEditTime: 2022-08-03 12:56:00
+ * @LastEditTime: 2022-11-02 09:53:20
  * @site: book.palxp.com
  */
 const path = require('path')
@@ -41,7 +41,7 @@ const saveTreeSidebar = (data) => {
   let sideText = ''
   function translate(data, level = 0) {
     for (const item of data) {
-      sideText += `${printBlankSpace(level)}* ${item.link ? `[${item.label}](${item.link})` : item.label}\r\n`
+      !item.hide && (sideText += `${printBlankSpace(level)}* ${item.link ? `[${item.label}](${item.link})` : item.label}\r\n`)
       if (item.children) {
         translate(item.children, level + 1)
       }

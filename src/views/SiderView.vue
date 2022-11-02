@@ -3,7 +3,7 @@
  * @Date: 2022-08-02 10:37:39
  * @Description:  
  * @LastEditors: ShawnPhang
- * @LastEditTime: 2022-08-11 11:10:15
+ * @LastEditTime: 2022-11-02 09:47:12
  * @site: book.palxp.com
 -->
 <template>
@@ -38,9 +38,8 @@ export default {
   },
   methods: {
     async save() {
-      const res = await api.saveTree(this.data)
+      await api.saveTree(this.data)
       this.$store.commit('setTreeData', this.data)
-      console.log(res)
     },
     clickNode(data) {
       this.editData = data

@@ -3,7 +3,7 @@
  * @Date: 2022-07-26 22:25:43
  * @Description:  
  * @LastEditors: ShawnPhang
- * @LastEditTime: 2022-10-29 17:09:10
+ * @LastEditTime: 2022-11-02 09:48:36
  * @site: book.palxp.com
 -->
 <template>
@@ -114,7 +114,10 @@ export default {
         })
       const msg = this.$message('正在提交中...')
       const { code } = await api.push()
-      code === 200 && msg.close() && this.$message.success('提交成功!')
+      if (code === 200) {
+        msg.close()
+        this.$message.success('提交成功!')
+      }
     },
     async exit() {
       this.loading = true
