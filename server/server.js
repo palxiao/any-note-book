@@ -3,7 +3,7 @@
  * @Date: 2022-07-26 14:51:59
  * @Description:
  * @LastEditors: ShawnPhang
- * @LastEditTime: 2022-10-26 14:41:29
+ * @LastEditTime: 2022-12-07 10:41:18
  * @site: book.palxp.com
  */
 // 导入http模块:
@@ -18,6 +18,7 @@ const checkPort = require('./utils/checkPortIsOccupied')
 const { getResourcesPath } = require('./utils/index')
 const { pullRepository, pushRepository } = require('./shell')
 const { saveTreeSidebar, getSidebarTree, getArticleDetail, saveArticle } = require('./utils/index')
+const { minImage } = require('./utils/minImage')
 
 let basePath = getResourcesPath()
 
@@ -64,9 +65,12 @@ const server = http.createServer(async function (request, response) {
     form.parse(request, async function (err, fields, files) {
       const file = files.file[0]
       const reader = fs.createReadStream(file.path)
-      const name = Math.random().toString() + '.' + file.originalFilename.split('.').pop().toLowerCase() || 'jpg'
+      const date = new Date()
+      const dateStr = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}-${date.getTime()}`
+      const name = dateStr + '.' + file.originalFilename.split('.').pop().toLowerCase() || 'jpg'
       const stream = fs.createWriteStream(path.join(basePath, './docs/images/' + name))
       reader.pipe(stream)
+      await minImage(reader, path.join(basePath, './docs/images/' + name))
       setJson(response, { path: '/images/' + name })
     })
   } else if (request.url.indexOf('/images/') !== -1) {
