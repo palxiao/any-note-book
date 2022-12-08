@@ -3,7 +3,7 @@
  * @Date: 2022-07-25 17:56:41
  * @Description:  
  * @LastEditors: ShawnPhang
- * @LastEditTime: 2022-10-28 18:29:38
+ * @LastEditTime: 2022-12-09 02:12:02
  * @site: book.palxp.com
 -->
 <template>
@@ -79,7 +79,7 @@ export default {
     }
     document.addEventListener('keydown', this._save)
   },
-  beforeUnmount() {
+  beforeDestroy() {
     document.removeEventListener('keydown', this._save)
   },
   methods: {

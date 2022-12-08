@@ -3,7 +3,7 @@
  * @Date: 2022-07-26 22:25:43
  * @Description:  
  * @LastEditors: ShawnPhang
- * @LastEditTime: 2022-11-02 09:48:36
+ * @LastEditTime: 2022-12-09 02:00:50
  * @site: book.palxp.com
 -->
 <template>
@@ -85,6 +85,7 @@ export default {
     },
     async listClose() {
       await api.saveTree(this.data)
+      this.$store.commit('setTreeData', this.data)
     },
     async selectArticle(node) {
       this.loading = true

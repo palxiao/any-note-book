@@ -3,7 +3,7 @@
  * @Date: 2022-08-02 10:37:39
  * @Description:  
  * @LastEditors: ShawnPhang
- * @LastEditTime: 2022-11-02 09:47:12
+ * @LastEditTime: 2022-12-09 02:12:11
  * @site: book.palxp.com
 -->
 <template>
@@ -30,16 +30,33 @@ export default {
     }
   },
   async beforeDestroy() {
+    document.removeEventListener('keydown', this._save)
     await this.save()
   },
   async created() {
-    const { result } = await api.getTree()
-    this.data = result
+    this.data = this.$store.getters.treeData
+    if (!this.data || this.data.length <= 0) {
+      const { result } = await api.getTree()
+      this.data = result
+    }
+  },
+  mounted() {
+    this._save = (e) => {
+      if (e.keyCode === 83 && (navigator.platform.match('Mac') ? e.metaKey : e.ctrlKey)) {
+        e.preventDefault()
+        this.save()
+      }
+    }
+    document.addEventListener('keydown', this._save)
   },
   methods: {
     async save() {
       await api.saveTree(this.data)
       this.$store.commit('setTreeData', this.data)
+      this.$notify({
+        title: '保存成功',
+        type: 'success',
+      })
     },
     clickNode(data) {
       this.editData = data
