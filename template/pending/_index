@@ -24,8 +24,8 @@
   <span id="busuanzi_container_site_pv">pv:<span id="busuanzi_value_site_pv"></span></span> -->
     <script>
       window.$docsify = {
-        name: '{{name}}',
-        repo: '{{repo}}',
+        name: '{{ name }}',
+        repo: '{{ repo }}',
         loadNavbar: true,
         loadSidebar: true,
         subMaxLevel: 2, // 显示目录
