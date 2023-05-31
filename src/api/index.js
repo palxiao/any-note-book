@@ -2,8 +2,8 @@
  * @Author: ShawnPhang
  * @Date: 2022-07-27 23:52:57
  * @Description:
- * @LastEditors: ShawnPhang
- * @LastEditTime: 2022-08-03 10:08:05
+ * @LastEditors: ShawnPhang <site: book.palxp.com>
+ * @LastEditTime: 2023-05-31 22:58:14
  * @site: book.palxp.com
  */
 function fetch(apiName, params) {
@@ -37,6 +37,9 @@ const postDetail = async (params) => {
 const saveArticle = async (params) => {
   return await fetch('/save', params)
 }
+const delArticle = async (params) => {
+  return await fetch('/del_article', params)
+}
 
 const saveImg = async (files) => {
   // return await fetch('/upload', params)
@@ -61,4 +64,5 @@ export default {
   getTree,
   postDetail,
   saveArticle,
+  delArticle,
 }

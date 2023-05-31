@@ -2,8 +2,8 @@
  * @Author: ShawnPhang
  * @Date: 2022-08-02 11:12:06
  * @Description:  
- * @LastEditors: ShawnPhang
- * @LastEditTime: 2022-11-02 09:45:10
+ * @LastEditors: ShawnPhang <site: book.palxp.com>
+ * @LastEditTime: 2023-05-31 23:14:42
  * @site: book.palxp.com
 -->
 <template>
@@ -34,6 +34,7 @@
 <script>
 import { Tree, Card } from 'element-ui'
 import { nanoid } from 'nanoid'
+import api from '@/api'
 
 export default {
   components: {
@@ -110,7 +111,7 @@ export default {
       this.$set(node, 'isEdit', false)
     },
     remove(node, data) {
-      this.$confirm('删除后无法恢复(但不会删除对应笔记)，确定删除？', '警告', {
+      this.$confirm('删除后从目录中移除，确定删除？', '警告', {
         confirmButtonText: '确认',
         cancelButtonText: '取消',
         type: 'warning',
@@ -119,7 +120,15 @@ export default {
           const parent = node.parent
           const children = parent.data.children || parent.data
           const index = children.findIndex((d) => d.id === data.id)
+          const link = children[index].link
           children.splice(index, 1)
+          this.$confirm('是否删除源文章？', '警告', {
+            confirmButtonText: '确认',
+            cancelButtonText: '取消',
+            type: 'warning',
+          }).then(() => {
+            api.delArticle({ link })
+          })
         })
         .catch(() => {})
     },

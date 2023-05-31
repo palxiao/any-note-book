@@ -3,7 +3,7 @@
  * @Date: 2022-07-26 14:51:59
  * @Description:
  * @LastEditors: ShawnPhang <site: book.palxp.com>
- * @LastEditTime: 2023-05-31 20:21:55
+ * @LastEditTime: 2023-05-31 23:15:16
  * @site: book.palxp.com
  */
 // 导入http模块:
@@ -61,6 +61,11 @@ const server = http.createServer(async function (request, response) {
     pushRepository().then((res) => {
       setJson(response, res)
     })
+  } else if (request.url === '/del_article') {
+    // 删除文章
+    const { link } = await getParams(request)
+    fs.unlinkSync(basePath + '/docs/' + link) // 删除文件
+    setJson(response, { msg: '删除成功' })
   } else if (request.url === '/upload') {
     // 上传图片
     const form = new multiparty.Form()
