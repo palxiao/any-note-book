@@ -2,8 +2,8 @@
  * @Author: ShawnPhang
  * @Date: 2022-07-26 14:51:59
  * @Description:
- * @LastEditors: ShawnPhang
- * @LastEditTime: 2022-12-07 10:41:18
+ * @LastEditors: ShawnPhang <site: book.palxp.com>
+ * @LastEditTime: 2023-05-31 20:21:55
  * @site: book.palxp.com
  */
 // 导入http模块:
@@ -19,6 +19,7 @@ const { getResourcesPath } = require('./utils/index')
 const { pullRepository, pushRepository } = require('./shell')
 const { saveTreeSidebar, getSidebarTree, getArticleDetail, saveArticle } = require('./utils/index')
 const { minImage } = require('./utils/minImage')
+const findUnlinkImages = require('./utils/findUnlinkImages')
 
 let basePath = getResourcesPath()
 
@@ -32,6 +33,7 @@ const server = http.createServer(async function (request, response) {
   response.setHeader('Access-Control-Allow-Methods', '*')
 
   if (request.url === '/list') {
+    findUnlinkImages()
     // 获取文章树
     setJson(response, getSidebarTree())
   } else if (request.url === '/detail') {

@@ -1,6 +1,6 @@
 {
   "name": "any-note-book",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -27,6 +27,8 @@
     "bytemd": "^1.17.2",
     "core-js": "^3.8.3",
     "element-ui": "^2.4.5",
+    "image-size": "^1.0.2",
+    "images": "3.2.3",
     "juejin-markdown-themes": "^1.29.3",
     "multiparty": "^4.2.3",
     "nanoid": "^4.0.0",
