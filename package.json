@@ -28,13 +28,18 @@
     "core-js": "^3.8.3",
     "element-ui": "^2.4.5",
     "image-size": "^1.0.2",
-    "images": "3.2.3",
+    "images": "^3.2.4",
     "juejin-markdown-themes": "^1.29.3",
     "multiparty": "^4.2.3",
     "nanoid": "^4.0.0",
     "vue": "^2.6.14",
     "vue-router": "^3.5.1",
     "vuex": "^3.6.2"
+  },
+  "overrides": {
+    "vue-cli-plugin-electron-builder": {
+      "electron-builder": "^23.0.3"
+    }
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~5.0.0",

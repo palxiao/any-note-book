@@ -1,15 +1,14 @@
 /*
  * @Author: ShawnPhang
- * @Date: 2022-12-07 08:10:46
- * @Description: 图片压缩
+ * @Date: 2023-06-01 23:19:20
+ * @Description: 本地图片压缩
  * @LastEditors: ShawnPhang <site: book.palxp.com>
- * @LastEditTime: 2023-05-31 17:17:26
- * @site: book.palxp.com
+ * @LastEditTime: 2023-06-12 15:31:16
  */
 // const Https = require('https')
 // const Url = require('url')
 // const fs = require('fs')
-const images = require('images') // 版本锁定3.2.3
+const images = require('images') // 如遇问题尝试版本锁定到3.2.3
 const sizeOf = require('image-size')
 
 const minImage = async (stream, path) => {
@@ -17,7 +16,7 @@ const minImage = async (stream, path) => {
     const file = await streamToBuffer(stream)
     const { width } = sizeOf(file)
     images(file)
-      .size(width > 850 ? 900 : width)
+      .size(width > 950 ? 1080 : width)
       .save(path, { quality: 75 })
   } catch (error) {
     console.log('图片未压缩')
