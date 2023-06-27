@@ -4,7 +4,6 @@
  * @Description:  
  * @LastEditors: ShawnPhang
  * @LastEditTime: 2022-08-03 10:36:55
- * @site: book.palxp.com
 -->
 <template>
   <el-dialog :width="width" :show-close="false" custom-class="web-view-dialog" :fullscreen="fullscreen" :visible.sync="centerDialogVisible" center @close="close">

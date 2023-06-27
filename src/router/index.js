@@ -4,7 +4,6 @@
  * @Description:
  * @LastEditors: ShawnPhang
  * @LastEditTime: 2022-08-02 16:27:22
- * @site: book.palxp.com
  */
 import Vue from 'vue'
 import VueRouter from 'vue-router'

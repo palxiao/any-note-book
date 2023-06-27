@@ -4,7 +4,6 @@
  * @Description:  
  * @LastEditors: ShawnPhang
  * @LastEditTime: 2022-08-11 11:32:20
- * @site: book.palxp.com
 -->
 <template>
   <div id="app">

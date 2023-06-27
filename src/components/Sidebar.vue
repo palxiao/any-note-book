@@ -4,7 +4,6 @@
  * @Description:  
  * @LastEditors: ShawnPhang <site: book.palxp.com>
  * @LastEditTime: 2023-05-31 23:14:42
- * @site: book.palxp.com
 -->
 <template>
   <el-card class="box-card">

@@ -4,7 +4,6 @@
  * @Description:
  * @LastEditors: ShawnPhang
  * @LastEditTime: 2022-11-02 09:53:20
- * @site: book.palxp.com
  */
 const path = require('path')
 const fs = require('fs')

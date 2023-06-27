@@ -4,7 +4,6 @@
  * @Description: 图片压缩
  * @LastEditors: ShawnPhang <site: book.palxp.com>
  * @LastEditTime: 2023-05-31 16:36:19
- * @site: book.palxp.com
  */
 const Https = require('https')
 const Url = require('url')

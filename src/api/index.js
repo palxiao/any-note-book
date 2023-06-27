@@ -4,7 +4,6 @@
  * @Description:
  * @LastEditors: ShawnPhang <site: book.palxp.com>
  * @LastEditTime: 2023-05-31 22:58:14
- * @site: book.palxp.com
  */
 function fetch(apiName, params) {
   return new Promise((resolve) => {

@@ -4,7 +4,6 @@
  * @Description:
  * @LastEditors: ShawnPhang
  * @LastEditTime: 2022-08-11 10:23:37
- * @site: book.palxp.com
  */
 import Vue from 'vue'
 import Vuex from 'vuex'

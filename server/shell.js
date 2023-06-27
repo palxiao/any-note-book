@@ -3,9 +3,8 @@
  * @Author: ShawnPhang
  * @Date: 2022-07-27 10:10:55
  * @Description:
- * @LastEditors: ShawnPhang
- * @LastEditTime: 2022-08-11 10:56:59
- * @site: book.palxp.com
+ * @LastEditors: ShawnPhang <site: book.palxp.com>
+ * @LastEditTime: 2023-06-27 11:54:07
  */
 const { getResourcesPath, getTemplatePath } = require('./utils/index')
 const { tempGenerate } = require('./utils/generate')
@@ -32,6 +31,7 @@ const pullRepository = async function (data) {
     checkDir(fullPath)
       .then(() => {
         if (data.force) {
+          // 强制更新
           cearteProject()
         } else {
           exec(`cd ${fullPath} && git pull origin ${branch}`, () => {

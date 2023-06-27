@@ -4,7 +4,6 @@
  * @Description:
  * @LastEditors: ShawnPhang
  * @LastEditTime: 2022-07-31 01:20:36
- * @site: book.palxp.com
  */
 const child_process = require('child_process')
 const exec = child_process.exec

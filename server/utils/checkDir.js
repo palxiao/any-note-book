@@ -4,7 +4,6 @@
  * @Description: 检测文件夹是否存在，create：没有则立即创建
  * @LastEditors: ShawnPhang
  * @LastEditTime: 2022-08-01 17:52:11
- * @site: book.palxp.com
  */
 module.exports = (path, create) => {
   const fs = require('fs')

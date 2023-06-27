@@ -4,7 +4,6 @@
  * @Description: 初始化项目（暂弃用，已改用 localstorage ）
  * @LastEditors: ShawnPhang
  * @LastEditTime: 2022-08-01 11:29:21
- * @site: book.palxp.com
  */
 const fs = require('fs')
 
