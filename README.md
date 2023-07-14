@@ -8,6 +8,8 @@
 
 报错问题需要升级 builder 比较麻烦，可以使用以下方法解决，安装依赖必须使用 yarn 或 npm（推荐 yarn），不可用 pnpm
 
+[打包错误问题参考](https://juejin.cn/post/7183626887103529016)
+
 #### 替换路径
 
 打开项目中的 `/node_modules/dmg-builder/out/dmg.js` 文件，找到 `/usr/bin/python` 替换为你的本机 python 路径（获取命令：`which python`）
