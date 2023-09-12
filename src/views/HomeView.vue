@@ -2,8 +2,8 @@
  * @Author: ShawnPhang
  * @Date: 2022-07-26 22:25:43
  * @Description:  
- * @LastEditors: ShawnPhang
- * @LastEditTime: 2022-12-09 02:00:50
+ * @LastEditors: ShawnPhang <https://m.palxp.cn>
+ * @LastEditTime: 2023-09-12 17:25:49
 -->
 <template>
   <div class="home">
@@ -83,8 +83,10 @@ export default {
       this.$refs.listDialog.open()
     },
     async listClose() {
+      this.loading = true
       await api.saveTree(this.data)
       this.$store.commit('setTreeData', this.data)
+      this.loading = false
     },
     async selectArticle(node) {
       this.loading = true
@@ -130,7 +132,7 @@ export default {
       this.$prompt('请输入图片转换的外链网址，否则图片无法正常被访问', '复制文章', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
-        inputValue: 'https://book.palxp.com/images',
+        inputValue: 'https://m.palxp.cn/images',
       })
         .then(({ value }) => {
           const textarea = document.createElement('textarea')

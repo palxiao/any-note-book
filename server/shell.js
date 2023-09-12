@@ -3,7 +3,7 @@
  * @Author: ShawnPhang
  * @Date: 2022-07-27 10:10:55
  * @Description:
- * @LastEditors: ShawnPhang <site: book.palxp.com>
+ * @LastEditors: ShawnPhang <site: m.palxp.cn>
  * @LastEditTime: 2023-06-27 11:54:07
  */
 const { getResourcesPath, getTemplatePath } = require('./utils/index')

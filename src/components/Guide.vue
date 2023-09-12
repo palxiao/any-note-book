@@ -2,7 +2,7 @@
  * @Author: ShawnPhang
  * @Date: 2022-07-26 22:25:43
  * @Description:  
- * @LastEditors: ShawnPhang <site: book.palxp.com>
+ * @LastEditors: ShawnPhang <site: m.palxp.cn>
  * @LastEditTime: 2023-06-27 15:35:13
 -->
 <template>
@@ -10,7 +10,7 @@
     <el-collapse v-if="history.length > 0" v-model="active">
       <el-collapse-item title="快速载入历史仓库" :name="1">
         <div class="box-wrap">
-          <div @click="select(item)" v-for="(item, i) in history" :key="'i' + i">
+          <div v-for="(item, i) in history" :key="'i' + i" @click="select(item)">
             <el-card class="box-card">
               <template #header>
                 <div class="card-header">
@@ -68,7 +68,7 @@ export default {
         name: 'Any-Note-Book',
         repo: '',
         plugin: [],
-        blog: 'https://blog.palxp.com',
+        blog: 'https://www.palxp.cn',
         juejin: 'https://juejin.cn/user/2682464103060541/posts',
         pages: '',
       },

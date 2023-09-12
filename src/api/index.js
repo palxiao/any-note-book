@@ -2,7 +2,7 @@
  * @Author: ShawnPhang
  * @Date: 2022-07-27 23:52:57
  * @Description:
- * @LastEditors: ShawnPhang <site: book.palxp.com>
+ * @LastEditors: ShawnPhang <site: m.palxp.cn>
  * @LastEditTime: 2023-05-31 22:58:14
  */
 function fetch(apiName, params) {

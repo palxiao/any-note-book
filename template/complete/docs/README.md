@@ -1,10 +1,10 @@
 <!--
  * @Author: ShawnPhang
- * @LastEditors: ShawnPhang
- * @Description: 
- * blog.palxp.com/book.palxp.com
+ * @LastEditors: ShawnPhang <https://m.palxp.cn>
+ * @Description:
+ * www.palxp.cn/m.palxp.cn
 -->
 
 # Any Note Book
 
-基于Docsify驱动，部署在GithubPages。
+基于 Docsify 驱动，部署在 GithubPages。

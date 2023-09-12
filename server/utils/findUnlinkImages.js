@@ -2,7 +2,7 @@
  * @Author: ShawnPhang
  * @Date: 2023-05-31 17:34:18
  * @Description:
- * @LastEditors: ShawnPhang <site: book.palxp.com>
+ * @LastEditors: ShawnPhang <site: m.palxp.cn>
  * @LastEditTime: 2023-05-31 20:37:44
  */
 const path = require('path')

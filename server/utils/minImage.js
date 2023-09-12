@@ -2,7 +2,7 @@
  * @Author: ShawnPhang
  * @Date: 2023-06-01 23:19:20
  * @Description: 本地图片压缩
- * @LastEditors: ShawnPhang <site: book.palxp.com>
+ * @LastEditors: ShawnPhang <site: m.palxp.cn>
  * @LastEditTime: 2023-06-12 15:31:16
  */
 // const Https = require('https')

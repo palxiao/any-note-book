@@ -2,8 +2,8 @@
  * @Author: ShawnPhang
  * @Date: 2022-08-02 11:12:06
  * @Description:  
- * @LastEditors: ShawnPhang <site: book.palxp.com>
- * @LastEditTime: 2023-05-31 23:14:42
+ * @LastEditors: ShawnPhang <https://m.palxp.cn>
+ * @LastEditTime: 2023-09-12 17:20:58
 -->
 <template>
   <el-card class="box-card">
@@ -105,6 +105,7 @@ export default {
     handleStatus(data) {
       // 设置编辑状态
       this.$set(data, 'hide', !data.hide)
+      this.$emit('input', this.data)
     },
     editDone(node, data) {
       this.$set(node, 'isEdit', false)
@@ -121,6 +122,7 @@ export default {
           const index = children.findIndex((d) => d.id === data.id)
           const link = children[index].link
           children.splice(index, 1)
+          this.$emit('input', this.data)
           this.$confirm('是否删除源文章？', '警告', {
             confirmButtonText: '确认',
             cancelButtonText: '取消',
