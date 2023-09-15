@@ -2,10 +2,12 @@
  * @Author: ShawnPhang
  * @Date: 2022-07-27 23:52:57
  * @Description:
- * @LastEditors: ShawnPhang <site: m.palxp.cn>
- * @LastEditTime: 2023-05-31 22:58:14
+ * @LastEditors: ShawnPhang <https://m.palxp.cn>
+ * @LastEditTime: 2023-09-15 17:45:50
  */
-function fetch(apiName, params) {
+function fetch(apiName, params = {}) {
+  let config = window.localStorage.getItem('config')
+  config = config ? JSON.parse(config) : {}
   return new Promise((resolve) => {
     const request = new XMLHttpRequest()
     request.open('POST', `${window._apiUrl}${apiName}`)
@@ -14,6 +16,7 @@ function fetch(apiName, params) {
     request.addEventListener('load', ({ currentTarget }) => {
       resolve(JSON.parse(currentTarget.response))
     })
+    params.repo = config.repo // 指定仓库
     request.send(JSON.stringify(params))
   })
 }
@@ -24,8 +27,8 @@ const pull = async (params) => {
 const push = async () => {
   return await fetch('/push')
 }
-const saveTree = async (params) => {
-  return await fetch('/save_tree', params)
+const saveTree = async (data) => {
+  return await fetch('/save_tree', { data })
 }
 const getTree = async () => {
   return await fetch('/list')
@@ -41,10 +44,13 @@ const delArticle = async (params) => {
 }
 
 const saveImg = async (files) => {
+  let config = window.localStorage.getItem('config')
+  config = config ? JSON.parse(config) : {}
   // return await fetch('/upload', params)
   return new Promise((resolve) => {
     const formData = new FormData()
     formData.append('file', files[0])
+    formData.append('repo', config.repo)
     const request = new XMLHttpRequest()
     request.open('POST', `${window._apiUrl}/upload`)
 

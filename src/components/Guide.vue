@@ -2,8 +2,8 @@
  * @Author: ShawnPhang
  * @Date: 2022-07-26 22:25:43
  * @Description:  
- * @LastEditors: ShawnPhang <site: m.palxp.cn>
- * @LastEditTime: 2023-06-27 15:35:13
+ * @LastEditors: ShawnPhang <https://m.palxp.cn>
+ * @LastEditTime: 2023-09-15 18:35:22
 -->
 <template>
   <el-form ref="form" v-loading="loading" :rules="rules" :model="form" label-width="80px">
@@ -50,8 +50,8 @@
       <el-input v-model="form.pages" type="textarea"></el-input>
     </el-form-item>
     <el-form-item>
-      <el-button type="primary" @click="onSubmit(true)">保存并更新</el-button>
-      <!-- <el-button @click="onSubmit(true)">强制更新</el-button> -->
+      <el-button type="primary" @click="onSubmit(false)">保存</el-button>
+      <el-button @click="onSubmit(true)">强制更新</el-button>
       <el-button>取消</el-button>
     </el-form-item>
   </el-form>
@@ -93,6 +93,7 @@ export default {
     onSubmit(force) {
       this.$refs['form'].validate(async (valid) => {
         if (valid) {
+          window.localStorage.setItem('config', JSON.stringify(this.form))
           if (force) {
             this.loading = true
             await api.pull({ ...this.form, ...{ force } })
@@ -100,7 +101,6 @@ export default {
           const index = this.history.findIndex((x) => x.repo === this.form.repo)
           index === -1 ? this.history.push(this.form) : (this.history[index] = this.form)
           window.localStorage.setItem('history', JSON.stringify(this.history))
-          window.localStorage.setItem('config', JSON.stringify(this.form))
           setTimeout(() => {
             this.loading = false
             this.$router.push({ path: '/', query: { rebuild: 1 } })

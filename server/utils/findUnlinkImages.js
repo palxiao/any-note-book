@@ -1,20 +1,19 @@
 /*
  * @Author: ShawnPhang
  * @Date: 2023-05-31 17:34:18
- * @Description:
- * @LastEditors: ShawnPhang <site: m.palxp.cn>
- * @LastEditTime: 2023-05-31 20:37:44
+ * @Description: 删除无效图片
+ * @LastEditors: ShawnPhang <https://m.palxp.cn>
+ * @LastEditTime: 2023-09-15 17:43:57
  */
 const path = require('path')
 const fs = require('fs')
 
 const { getResourcesPath } = require('./index')
-const articlesPath = getResourcesPath() + '/docs/articles'
-const imagesPath = getResourcesPath() + '/docs/images'
-
 // const unlinkImages = [] // 需要删除的图片数组
 
-const findUnlinkImages = async function () {
+const findUnlinkImages = async function (repo) {
+  const articlesPath = getResourcesPath(repo) + '/docs/articles'
+  const imagesPath = getResourcesPath(repo) + '/docs/images'
   const articles = await traversalDir(articlesPath)
   for (let i = 0; i < articles.length; i++) {
     const filename = articles[i]

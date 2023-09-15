@@ -3,7 +3,7 @@
  * @Date: 2022-08-02 11:12:06
  * @Description:  
  * @LastEditors: ShawnPhang <https://m.palxp.cn>
- * @LastEditTime: 2023-09-12 17:20:58
+ * @LastEditTime: 2023-09-12 17:38:41
 -->
 <template>
   <el-card class="box-card">
@@ -123,6 +123,7 @@ export default {
           const link = children[index].link
           children.splice(index, 1)
           this.$emit('input', this.data)
+          this.$store.commit('setTreeData', this.data)
           this.$confirm('是否删除源文章？', '警告', {
             confirmButtonText: '确认',
             cancelButtonText: '取消',

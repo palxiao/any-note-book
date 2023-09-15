@@ -2,8 +2,8 @@
  * @Author: ShawnPhang
  * @Date: 2022-07-25 17:56:41
  * @Description:  
- * @LastEditors: ShawnPhang
- * @LastEditTime: 2022-12-09 02:12:02
+ * @LastEditors: ShawnPhang <https://m.palxp.cn>
+ * @LastEditTime: 2023-09-15 18:13:13
 -->
 <template>
   <Editor v-bind="options" :value="content" :plugins="plugins" @change="handleChange" />
@@ -28,7 +28,9 @@ import api from '@/api'
 
 const uploadImages = async (files) => {
   const res = await api.saveImg(files)
-  return [{ url: window._apiUrl + res.result.path, alt: '' }]
+  let config = window.localStorage.getItem('config')
+  config = config ? JSON.parse(config) : {}
+  return [{ url: window._apiUrl + `/${config.repo}` + res.result.path, alt: '' }]
 }
 
 let timer = null
@@ -57,7 +59,9 @@ export default {
     value() {
       // this.content !== this.value && (this.content = this.value)
       if (this.content !== this.value) {
-        const value = this.value.replaceAll('](../images', '](' + window._apiUrl + '/images')
+        let config = window.localStorage.getItem('config')
+        config = config ? JSON.parse(config) : {}
+        const value = this.value.replaceAll('](../images', '](' + window._apiUrl + `/${config.repo}/images`)
         this.content = value
       }
       timer && clearTimeout(timer)

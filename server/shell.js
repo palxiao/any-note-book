@@ -3,8 +3,8 @@
  * @Author: ShawnPhang
  * @Date: 2022-07-27 10:10:55
  * @Description:
- * @LastEditors: ShawnPhang <site: m.palxp.cn>
- * @LastEditTime: 2023-06-27 11:54:07
+ * @LastEditors: ShawnPhang <https://m.palxp.cn>
+ * @LastEditTime: 2023-09-15 17:53:58
  */
 const { getResourcesPath, getTemplatePath } = require('./utils/index')
 const { tempGenerate } = require('./utils/generate')
@@ -19,7 +19,7 @@ let params = {}
 const pullRepository = async function (data) {
   params = data
   const name = data.repo
-  const fullPath = getResourcesPath()
+  const fullPath = getResourcesPath(name)
   const gitAddress = `git@github.com:${name}.git`
   const shell = `git clone -b ${branch} ${gitAddress} --depth 1 ${fullPath}`
 
@@ -78,7 +78,7 @@ const init = async (path) => {
       })
       .catch(() => {
         // 不是完整的项目，执行文件的初始化
-        exec(`cp -r ${getTemplatePath()}/complete/* ${getResourcesPath()}`, () => {
+        exec(`cp -r ${getTemplatePath(params.repo)}/complete/* ${getResourcesPath(params.repo)}`, () => {
           tempGenerate(params)
           resolve()
         })
@@ -88,9 +88,8 @@ const init = async (path) => {
 
 const pushRepository = function () {
   const message = 'feat: auto update'
-  const fullPath = getResourcesPath()
+  const fullPath = getResourcesPath(params.repo)
   const sp = `cd ${fullPath} &&`
-
   return new Promise((resolve) => {
     exec(`${sp} git add . && git commit -m '${message}'`, (error, stdout, stderr) => {
       if (String(error) !== 'null') {

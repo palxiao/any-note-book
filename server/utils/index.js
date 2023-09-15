@@ -2,25 +2,26 @@
  * @Author: ShawnPhang
  * @Date: 2022-08-01 11:28:21
  * @Description:
- * @LastEditors: ShawnPhang
- * @LastEditTime: 2022-11-02 09:53:20
+ * @LastEditors: ShawnPhang <https://m.palxp.cn>
+ * @LastEditTime: 2023-09-15 17:53:41
  */
 const path = require('path')
 const fs = require('fs')
-// const checkDir = require('./checkDir.js')
+const checkDir = require('./checkDir.js')
 
-const getResourcesPath = () => {
-  let thePath = ''
+const getResourcesPath = (secondPath) => {
+  let prePath = ''
   switch (process.env.NODE_ENV) {
     case 'development':
       // basePath = path.join(__static, '/') // eslint-disable-line no-undef
-      thePath = 'static'
+      prePath = 'static'
       break
     case 'production':
-      thePath = path.join(process.resourcesPath, './static')
+      prePath = path.join(process.resourcesPath, `./static`)
       break
   }
-  return thePath
+  checkDir(prePath, true)
+  return prePath + `/${secondPath}`
 }
 
 const getTemplatePath = () => {
@@ -36,7 +37,7 @@ const getTemplatePath = () => {
   return thePath
 }
 
-const saveTreeSidebar = (data) => {
+const saveTreeSidebar = ({ repo, data }) => {
   let sideText = ''
   function translate(data, level = 0) {
     for (const item of data) {
@@ -47,8 +48,8 @@ const saveTreeSidebar = (data) => {
     }
   }
   translate(data)
-  fs.writeFileSync(`${getResourcesPath()}/docs/_sidebar.md`, sideText)
-  fs.writeFileSync(`${getResourcesPath()}/docs/_sidebar.json`, JSON.stringify(data, null, 2))
+  fs.writeFileSync(`${getResourcesPath(repo)}/docs/_sidebar.md`, sideText)
+  fs.writeFileSync(`${getResourcesPath(repo)}/docs/_sidebar.json`, JSON.stringify(data, null, 2))
 }
 const printBlankSpace = (num = 0) => {
   let val = ''
@@ -58,19 +59,19 @@ const printBlankSpace = (num = 0) => {
   return val
 }
 
-const getSidebarTree = () => {
-  let txt = fs.readFileSync(`${getResourcesPath()}/docs/_sidebar.json`, 'utf8')
+const getSidebarTree = ({ repo }) => {
+  let txt = fs.readFileSync(`${getResourcesPath(repo)}/docs/_sidebar.json`, 'utf8')
   return JSON.parse(txt)
 }
 
-const getArticleDetail = (link) => {
+const getArticleDetail = ({ repo, link }) => {
   let text = ''
   let path = ''
   if (link) {
-    path = `${getResourcesPath()}/docs/${link}`
+    path = `${getResourcesPath(repo)}/docs/${link}`
     text = fs.readFileSync(path, 'utf8')
   } else {
-    path = `${getResourcesPath()}/docs/articles/${new Date().getTime()}.md`
+    path = `${getResourcesPath(repo)}/docs/articles/${new Date().getTime()}.md`
     fs.writeFileSync(path, '')
   }
   return { text, path }

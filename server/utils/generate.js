@@ -1,3 +1,10 @@
+/*
+ * @Author: ShawnPhang
+ * @Date: 2023-01-01 18:39:02
+ * @Description: 创建文件
+ * @LastEditors: ShawnPhang <https://m.palxp.cn>
+ * @LastEditTime: 2023-09-15 17:29:56
+ */
 const fs = require('fs')
 const { getResourcesPath, getTemplatePath } = require('./index')
 
@@ -11,9 +18,9 @@ const generateData = {
     src="https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web/7abc2b532f725d394feaf0141547ade7.svg" /></a>`
       : ''
   },
-  文字计数: '<script src="//unpkg.com/docsify-count/dist/countable.js"></script>',
-  图片缩放查看器: '<script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>',
-  代码复制到剪贴板: '<script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>',
+  文字计数: '<script src="https://npm.elemecdn.com/docsify-count/dist/countable.js"></script>',
+  图片缩放查看器: '<script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/docsify/4.12.2/plugins/zoom-image.min.js"></script>',
+  代码复制到剪贴板: '<script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/docsify-copy-code/2.1.1/docsify-copy-code.min.js"></script>',
 }
 
 const tempGenerate = (params) => {
@@ -28,7 +35,7 @@ const tempGenerate = (params) => {
       allPlugins += generateData[plugin]
     }
     _index = _index.replace(/{{ plugins }}/g, allPlugins)
-    fs.writeFileSync(`${getResourcesPath()}/docs/index.html`, _index) // 写入目标文件
+    fs.writeFileSync(`${getResourcesPath(params.repo)}/docs/index.html`, _index) // 写入目标文件
   } catch (err) {
     console.error(err)
   }

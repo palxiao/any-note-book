@@ -3,7 +3,7 @@
  * @Date: 2022-07-26 22:25:43
  * @Description:  
  * @LastEditors: ShawnPhang <https://m.palxp.cn>
- * @LastEditTime: 2023-09-12 17:25:49
+ * @LastEditTime: 2023-09-15 18:12:40
 -->
 <template>
   <div class="home">
@@ -107,7 +107,9 @@ export default {
       this.$refs.dialog.close()
     },
     async saveArticle(passive) {
-      const value = this.value.replaceAll(window._apiUrl + '/images', '../images')
+      let config = window.localStorage.getItem('config')
+      config = config ? JSON.parse(config) : {}
+      const value = this.value.replaceAll(window._apiUrl + `/${config.repo}/images`, '../images')
       await api.saveArticle({ path: this.curPath, value })
       !passive &&
         this.$notify({
